@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTable-example
+      author: ricardobaumann
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+            tableName: test
+  - changeSet:
+      id: create-address-table
+      author: ricardobaumann
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: integer
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: text
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+            tableName: addresses
+  - changeSet:
+      id: create-address-event-table
+      author: ricardobaumann
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: content
+                  type: text
+                  constraints:
+                    nullable: false
+            tableName: address_events
