@@ -1,5 +1,6 @@
 package de.outfittery.addressservice.events
 
+import de.outfittery.addressservice.dtos.AddressEventDto
 import de.outfittery.addressservice.models.Address
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Component

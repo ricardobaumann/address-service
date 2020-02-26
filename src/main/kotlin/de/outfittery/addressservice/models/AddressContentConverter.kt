@@ -1,7 +1,7 @@
 package de.outfittery.addressservice.models
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import de.outfittery.addressservice.events.AddressEventDto
+import de.outfittery.addressservice.dtos.AddressEventDto
 import javax.persistence.AttributeConverter
 import javax.persistence.Converter
 

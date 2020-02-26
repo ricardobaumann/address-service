@@ -1,5 +1,6 @@
 package de.outfittery.addressservice.events
 
+import de.outfittery.addressservice.dtos.AddressEventDto
 import de.outfittery.addressservice.models.AddressEvent
 import de.outfittery.addressservice.service.AddressEventService
 import mu.KLogging
@@ -17,7 +18,7 @@ class AddressEventDbLogger(private val addressEventService: AddressEventService)
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     fun on(eventDto: AddressEventDto) {
         try {
-            addressEventService.save(AddressEvent(content = eventDto))
+            addressEventService.save(AddressEvent(content = eventDto, id = eventDto.id))
         } catch (e: Exception) {
             logger.warn("Failed to persist address event on db: {}", eventDto, e)
         }
