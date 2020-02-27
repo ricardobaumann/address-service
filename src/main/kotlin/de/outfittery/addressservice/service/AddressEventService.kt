@@ -13,9 +13,9 @@ class AddressEventService(private val addressEventRepo: AddressEventRepo) {
 
     companion object : KLogging()
 
-    fun save(@Valid addressEvent: AddressEvent) {
-        addressEventRepo.save(addressEvent).also {
-            logger.info("Event stored in db: {}", it)
-        }
-    }
+    fun save(@Valid addressEvent: AddressEvent) =
+            addressEventRepo.save(addressEvent).also {
+                logger.info("Event stored in db: {}", it)
+            }
+
 }

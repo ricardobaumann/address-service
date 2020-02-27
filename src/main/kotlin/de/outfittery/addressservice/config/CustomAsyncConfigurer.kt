@@ -13,6 +13,7 @@ import java.util.concurrent.Executor
 class CustomAsyncConfigurer(private val customThreadPoolProperties: CustomThreadPoolProperties) : AsyncConfigurer {
 
     override fun getAsyncExecutor(): Executor? = ThreadPoolTaskExecutor().also {
+        it.setThreadNamePrefix("background-")
         it.maxPoolSize = customThreadPoolProperties.max
         it.corePoolSize = customThreadPoolProperties.core
         it.initialize()
