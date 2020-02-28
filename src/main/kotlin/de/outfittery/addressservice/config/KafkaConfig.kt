@@ -5,6 +5,4 @@ import org.springframework.kafka.annotation.EnableKafka
 
 @EnableKafka
 @Configuration
-class KafkaTopicConfig {
-
-}
+class KafkaConfig
