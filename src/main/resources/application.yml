@@ -1,7 +1,24 @@
 spring:
   application:
     name: address-service
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: test
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+    template:
+      default-topic: addresses
 
 custom-thread-pool:
   max: 200
   core: 50
+
+kafka.bootstrapAddress: 127.0.0.1:9092
+message.topic.name: addresses

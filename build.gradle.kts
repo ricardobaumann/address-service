@@ -29,6 +29,7 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.7")
     implementation("io.github.microutils:kotlin-logging:1.6.26")
+    implementation("org.springframework.kafka:spring-kafka")
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

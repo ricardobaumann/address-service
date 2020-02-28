@@ -1,8 +1,8 @@
 package de.outfittery.addressservice.controllers
 
 import de.outfittery.addressservice.dtos.AddressCommand
+import de.outfittery.addressservice.dtos.AddressCreationResponse
 import de.outfittery.addressservice.dtos.AddressCreationResult
-import de.outfittery.addressservice.dtos.AddressValidationResult
 import de.outfittery.addressservice.models.Address
 import de.outfittery.addressservice.service.AddressService
 import mu.KLogging
@@ -25,7 +25,7 @@ class AddressController(private val addressService: AddressService) {
     @PostMapping
     fun create(@RequestBody @Valid addressCommand: AddressCommand) =
             addressService.save(addressCommand.toAddress()).also {
-                logger.info("Address create successfully: {}", it)
+                logger.info("Address created successfully: {}", it)
             }.toAddressCreationResponse().toResponseEntity()
 }
 
@@ -36,11 +36,6 @@ private fun AddressCreationResponse.toResponseEntity() =
 private fun AddressCreationResult.toAddressCreationResponse() = AddressCreationResponse(
         id = this.address?.id,
         addressValidationResult = this.addressValidationResult
-)
-
-data class AddressCreationResponse(
-        val id: Long?,
-        val addressValidationResult: AddressValidationResult
 )
 
 private fun AddressCommand.toAddress(): Address = Address(
