@@ -5,6 +5,7 @@ import de.outfittery.addressservice.dtos.AddressEventDto
 import de.outfittery.addressservice.events.AddressEventPublisher
 import de.outfittery.addressservice.models.Address
 import de.outfittery.addressservice.repos.AddressRepo
+import de.outfittery.addressservice.service.validation.AddressValidationService
 import mu.KLogging
 import org.springframework.stereotype.Service
 import org.springframework.validation.annotation.Validated

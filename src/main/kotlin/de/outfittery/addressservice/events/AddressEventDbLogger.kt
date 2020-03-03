@@ -18,7 +18,7 @@ class AddressEventDbLogger(private val addressEventService: AddressEventService)
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     fun on(eventDto: AddressEventDto) {
         try {
-            addressEventService.save(AddressEvent(content = eventDto, id = eventDto.id))
+            addressEventService.save(AddressEvent(content = eventDto, id = eventDto.id, address = eventDto.address))
         } catch (e: Exception) {
             logger.warn("Failed to persist address event on db: {}", eventDto, e)
         }

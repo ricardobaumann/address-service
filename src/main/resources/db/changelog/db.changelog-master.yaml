@@ -54,8 +54,33 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
               - column:
+                  name: address_id
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
                   name: content
                   type: text
                   constraints:
                     nullable: false
             tableName: address_events
+  - changeSet:
+      id: create-address-validation-event-table
+      author: ricardobaumann
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+              - column:
+                  name: address_id
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content
+                  type: text
+                  constraints:
+                    nullable: false
+            tableName: address_validation_events
