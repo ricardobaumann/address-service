@@ -76,8 +76,6 @@ databaseChangeLog:
               - column:
                   name: address_id
                   type: integer
-                  constraints:
-                    nullable: false
               - column:
                   name: content
                   type: text

@@ -9,6 +9,6 @@ import javax.validation.constraints.NotNull
 @Table(name = "address_validation_events")
 data class AddressValidationEvent(
         @Id val id: String = UUID.randomUUID().toString(),
-        @NotNull @ManyToOne val address: Address? = null,
+        @ManyToOne @JoinColumn(name = "address_id") val address: Address? = null,
         @NotNull @Convert(converter = AddressValidationResultConverter::class) val content: AddressValidationResult? = null
 )
