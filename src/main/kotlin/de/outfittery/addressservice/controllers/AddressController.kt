@@ -31,11 +31,12 @@ class AddressController(private val addressService: AddressService) {
 
 private fun AddressCreationResponse.toResponseEntity() =
         ResponseEntity(this,
-                if (this.addressValidationResult.isSuccess()) HttpStatus.CREATED else HttpStatus.CONFLICT)
+                if (this.success) HttpStatus.CREATED else HttpStatus.CONFLICT)
 
 private fun AddressCreationResult.toAddressCreationResponse() = AddressCreationResponse(
         id = this.address?.id,
-        addressValidationResult = this.addressValidationResult
+        correctionList = this.addressValidationResult.correctionList,
+        success = this.addressValidationResult.isSuccess()
 )
 
 private fun AddressCommand.toAddress(): Address = Address(

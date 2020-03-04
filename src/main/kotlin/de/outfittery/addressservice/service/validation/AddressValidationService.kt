@@ -1,15 +1,37 @@
 package de.outfittery.addressservice.service.validation
 
+import de.outfittery.addressservice.dtos.AddressValidationCommand
 import de.outfittery.addressservice.dtos.AddressValidationResult
-import de.outfittery.addressservice.models.Address
+import de.outfittery.addressservice.models.AddressValidationEvent
+import de.outfittery.addressservice.repos.AddressValidationEventRepo
+import de.outfittery.addressservice.service.AddressService
 import mu.KLogging
+import org.springframework.cache.annotation.Cacheable
+import org.springframework.context.ApplicationEventPublisher
+import org.springframework.context.event.EventListener
+import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 
 @Service
-class AddressValidationService {
+class AddressValidationService(private val applicationEventPublisher: ApplicationEventPublisher,
+                               private val addressValidationEventRepo: AddressValidationEventRepo) {
 
     companion object : KLogging()
 
-    fun validate(address: Address) = AddressValidationResult()
+    @Cacheable("addresses")
+    fun validate(addressValidationCommand: AddressValidationCommand) =
+            AddressValidationResult(addressValidationCommand = addressValidationCommand)
+                    .also {
+                        applicationEventPublisher.publishEvent(it)
+                    }
+
+    @Async
+    @EventListener
+    fun on(addressValidationResult: AddressValidationResult) {
+        addressValidationEventRepo.save(AddressValidationEvent(
+                content = addressValidationResult
+        ))
+        AddressService.logger.info("Address validation result persisted : {}", addressValidationResult)
+    }
 
 }
