@@ -20,10 +20,13 @@ class AddressValidationService(private val applicationEventPublisher: Applicatio
 
     @Cacheable("addresses")
     fun validate(addressValidationCommand: AddressValidationCommand) =
-            AddressValidationResult(addressValidationCommand = addressValidationCommand)
+            validateOn3rdParty(addressValidationCommand)
                     .also {
                         applicationEventPublisher.publishEvent(it)
                     }
+
+    private fun validateOn3rdParty(addressValidationCommand: AddressValidationCommand) =
+            AddressValidationResult(addressValidationCommand = addressValidationCommand)
 
     @Async
     @EventListener
