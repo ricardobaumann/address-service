@@ -4,7 +4,6 @@ import de.outfittery.addressservice.dtos.AddressValidationCommand
 import de.outfittery.addressservice.dtos.AddressValidationResult
 import de.outfittery.addressservice.models.AddressValidationEvent
 import de.outfittery.addressservice.repos.AddressValidationEventRepo
-import de.outfittery.addressservice.service.AddressService
 import mu.KLogging
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.context.ApplicationEventPublisher
@@ -34,7 +33,7 @@ class AddressValidationService(private val applicationEventPublisher: Applicatio
         addressValidationEventRepo.save(AddressValidationEvent(
                 content = addressValidationResult
         ))
-        AddressService.logger.info("Address validation result persisted : {}", addressValidationResult)
+        logger.info("Address validation result persisted : {}", addressValidationResult)
     }
 
 }
