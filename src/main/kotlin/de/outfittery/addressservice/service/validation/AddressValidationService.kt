@@ -2,6 +2,7 @@ package de.outfittery.addressservice.service.validation
 
 import de.outfittery.addressservice.dtos.AddressValidationCommand
 import de.outfittery.addressservice.dtos.AddressValidationResult
+import de.outfittery.addressservice.dtos.AddressValidationStatus
 import de.outfittery.addressservice.models.AddressValidationEvent
 import de.outfittery.addressservice.repos.AddressValidationEventRepo
 import mu.KLogging
@@ -25,7 +26,13 @@ class AddressValidationService(private val applicationEventPublisher: Applicatio
                     }
 
     private fun validateOn3rdParty(addressValidationCommand: AddressValidationCommand) =
-            AddressValidationResult(addressValidationCommand = addressValidationCommand)
+            AddressValidationResult(
+                    addressValidationCommand = addressValidationCommand,
+                    status = AddressValidationStatus.INVALID,
+                    correctionList = listOf(AddressValidationCommand(
+                            someAddressField = addressValidationCommand.someAddressField //TODO define fields to be returned
+                    ))
+            )
 
     @Async
     @EventListener

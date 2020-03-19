@@ -23,7 +23,7 @@ class AddressService(private val addressRepo: AddressRepo,
 
     @Transactional
     fun save(@Valid address: Address): AddressCreationResult =
-            addressValidationService.validate(AddressValidationCommand(someAddressField = address.text))
+            addressValidationService.validate(AddressValidationCommand(someAddressField = address.street))
                     .let {
                         AddressCreationResult(
                                 addressValidationResult = it,
