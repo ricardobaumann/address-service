@@ -8,11 +8,13 @@ import de.outfittery.addressservice.service.AddressService
 import mu.KLogging
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.scheduling.annotation.Async
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.util.concurrent.CompletableFuture
 import javax.validation.Valid
 
 @Validated
@@ -22,21 +24,23 @@ class AddressController(private val addressService: AddressService) {
 
     companion object : KLogging()
 
+    @Async
     @PostMapping
     fun create(@RequestBody @Valid addressCommand: AddressCreateCommand) =
-            addressService.save(addressCommand.toAddress()).also {
+            CompletableFuture.completedFuture(addressService.save(addressCommand.toAddress()).also {
                 logger.info("Address created successfully: {}", it)
-            }.toAddressCreationResponse().toResponseEntity()
+            }.toAddressCreationResponse().toResponseEntity())
+
 }
 
 private fun AddressCreationResponse.toResponseEntity() =
         ResponseEntity(this,
-                if (this.success) HttpStatus.CREATED else HttpStatus.CONFLICT)
+                if (this.success == true) HttpStatus.CREATED else HttpStatus.CONFLICT)
 
 private fun AddressCreationResult.toAddressCreationResponse() = AddressCreationResponse(
         id = this.address?.id,
-        correctionList = this.addressValidationResult.correctionList,
-        success = this.addressValidationResult.isSuccess()
+        correctionList = this.addressValidationResult?.correctionList,
+        success = this.addressValidationResult?.isSuccess()
 )
 
 private fun AddressCreateCommand.toAddress(): Address = Address(

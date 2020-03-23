@@ -22,10 +22,50 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
               - column:
-                  name: text
-                  type: varchar(255)
+                  name: first_name
+                  type: varchar(500)
                   constraints:
                     nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: street
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: co
+                  type: varchar(200)
+              - column:
+                  name: co_type
+                  type: varchar(100)
+              - column:
+                  name: street_number
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: addition_to_address
+                  type: varchar(500)
+              - column:
+                  name: zip
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: country
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: default_shipping_address
+                  type: boolean
+              - column:
+                  name: default_billing_address
+                  type: boolean
               - column:
                   name: customer_id
                   type: integer

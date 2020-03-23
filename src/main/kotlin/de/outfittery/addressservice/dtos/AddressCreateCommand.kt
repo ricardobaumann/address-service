@@ -1,5 +1,6 @@
 package de.outfittery.addressservice.dtos
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
@@ -17,3 +18,20 @@ data class AddressCreateCommand(
         val defaultShippingAddress: Boolean = false,
         val defaultBillingAddress: Boolean = false
 )
+
+fun main() {
+    println(ObjectMapper().writeValueAsString(AddressCreateCommand(
+            customerId = 123,
+            firstName = "Address",
+            lastName = "Service",
+            street = "Addessstrasse",
+            streetNumber = "7A",
+            co = "Address man",
+            coType = "COMPANY",
+            additionToAddress = "take care with my package",
+            zip = "12207",
+            country = "DE",
+            defaultShippingAddress = true,
+            defaultBillingAddress = true
+    )))
+}

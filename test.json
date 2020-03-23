@@ -1,0 +1,14 @@
+{
+  "customerId": 123,
+  "firstName": "Address",
+  "lastName": "Service",
+  "street": "Addessstrasse",
+  "co": "Address man",
+  "coType": "COMPANY",
+  "streetNumber": "7A",
+  "additionToAddress": "take care with my package",
+  "zip": "12207",
+  "country": "DE",
+  "defaultShippingAddress": true,
+  "defaultBillingAddress": true
+}

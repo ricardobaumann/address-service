@@ -28,7 +28,7 @@ class AddressValidationService(private val applicationEventPublisher: Applicatio
     private fun validateOn3rdParty(addressValidationCommand: AddressValidationCommand) =
             AddressValidationResult(
                     addressValidationCommand = addressValidationCommand,
-                    status = AddressValidationStatus.INVALID,
+                    status = AddressValidationStatus.VALID,
                     correctionList = listOf(AddressValidationCommand(
                             someAddressField = addressValidationCommand.someAddressField //TODO define fields to be returned
                     ))

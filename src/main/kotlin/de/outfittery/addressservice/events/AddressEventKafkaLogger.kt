@@ -18,6 +18,7 @@ class AddressEventKafkaLogger(private val kafkaTemplate: KafkaTemplate<String, S
     @Async
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     fun on(eventDto: AddressEventDto) {
+        Thread.sleep(5000)//takes a long time
         logger.info("Logging event on kafka: {}", eventDto)
         kafkaTemplate.sendDefault(objectMapper.writeValueAsString(eventDto))
     }

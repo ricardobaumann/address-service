@@ -4,5 +4,5 @@ import de.outfittery.addressservice.models.Address
 
 data class AddressCreationResult(
         val address: Address? = null,
-        val addressValidationResult: AddressValidationResult
+        val addressValidationResult: AddressValidationResult? = null
 )
